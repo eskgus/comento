@@ -6,5 +6,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.eskgus.mapper.BoardMapper">
 
+<insert id="create">
+insert into tbl01 (title, content, writer)
+values(#{title}, #{content}, #{writer})
+</insert>
+
+<select id="read" resultType="com.eskgus.domain.BoardVO">
+select bno, title, content, writer, regdate, viewcnt
+from tbl01
+where bno = #{bno}
+</select>
+
+<update id="update">
+update tbl01 set title = #{title}, content = #{content}
+where bno = #{bno}
+</update>
+
+<delete id="delete">
+delete from tbl01 where bno = #{bno}
+</delete>
+
+<select id="listAll" resultType="com.eskgus.domain.BoardVO">
+<![CDATA[
+select bno, title, content, writer, regdate, viewcnt
+from tbl01
+where bno > 0
+order by bno desc, regdate desc
+]]></select>
   
 </mapper>
